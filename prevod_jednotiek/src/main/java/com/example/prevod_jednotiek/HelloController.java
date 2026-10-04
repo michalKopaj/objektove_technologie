@@ -12,7 +12,31 @@ public class HelloController {
     private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private void initialize() {
+        jednotka.getItems().addAll("mm", "cm", "m", "km");
+        jednotka.setValue("m");
     }
-}
+
+
+    @FXML
+    protected void prepocitaj() {
+        try {
+            double hodnota = Double.parseDouble(vstup.getText().trim().replace(',', '.'));
+            double metre = hodnota * faktor(jednotka.getValue());
+            vystupMm.setText(format(metre * 1000));
+            vystupCm.setText(format(metre * 100));
+            vystupM.setText(format(metre));
+            vystupKm.setText(format(metre / 1000));
+            chyba.setText("");
+        } catch (NumberFormatException e) {
+            chyba.setText("Zadajte platné číslo");
+        }
+    }
+    private double faktor(String j) {
+        return switch (j) {
+            case "mm" -> 0.001;
+            case "cm" -> 0.01;
+            case "km" -> 1000;
+            default -> 1;
+        };
+    }
