@@ -5,16 +5,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 
+import java.text.DecimalFormat;
+
 public class HelloController {
     @FXML private TextField vstup,vystupMm,vystupCm,vystupM,vystupKm;
     @FXML private ComboBox <String> jednotka;
-    @FXML private label chyba;
-    private Label welcomeText;
+    @FXML private Label chyba;
+
 
     @FXML
     private void initialize() {
-        jednotka.getItems().addAll("mm", "cm", "m", "km");
-        jednotka.setValue("m");
+
     }
 
 
@@ -40,3 +41,8 @@ public class HelloController {
             default -> 1;
         };
     }
+
+    private String format(double x) {
+        return new DecimalFormat("0.#########").format(x);
+    }
+}
