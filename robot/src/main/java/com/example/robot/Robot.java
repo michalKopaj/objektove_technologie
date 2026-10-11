@@ -23,6 +23,31 @@ public class Robot extends Canvas{
         setLayoutY(y);
         gc=getGraphicsContext2D();
         vykresli();
+        casovac=new Timeline(new KeyFrame(Duration.millis(50),e -> pusun()));
+        casovac.setCycleCount(Timeline.INDEFINITE);
+        setOnKeyPressed(evt ->spracuj(evt));
+        setOnMouseClicked(evt -> klik());
+        setFocusTraversable(true);
+        requestFocus();
+    }
+    private void vykresli(){
+            gc.clearRect(0,0,40,40);
+            gc.setFill(Color.Blue);
+            gc.fillRect(0,0,40,40);
+            gc.setFill(Color.YELLOW);
+            switch (smer){
+                case 0: gc.fillRect(0,0,40,40); break;
+                case 1: gc.fillRect(30,0,10,40);break;
+                case 2: gc.fillRect(0,30,40,10);break;
+                case 3: gc.fillRect(0,0,10,40);break;
+
+                
+
+            }
+
+
+
+
     }
 
 }
