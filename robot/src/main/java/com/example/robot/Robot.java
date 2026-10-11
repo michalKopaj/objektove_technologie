@@ -38,7 +38,7 @@ public class Robot extends Canvas{
         gc.setFill(Color.YELLOW);
         switch (smer) {
             case 0:
-                gc.fillRect(0, 0, 40, 40);
+                gc.fillRect(0, 0, 40, 10);
                 break;
             case 1:
                 gc.fillRect(30, 0, 10, 40);
@@ -56,7 +56,7 @@ public class Robot extends Canvas{
 
     }
 
-    private void spracuj(KeyEvent e){
+    private void spracuj(KeyEvent evt){
         if(auto) return;
         KeyCode k = evt.getCode();
         if (k == KeyCode.W) smer=0;
@@ -82,8 +82,8 @@ public class Robot extends Canvas{
 
 
                 }
-                double maxX=getScene().getWidth();
-                double maxY=getScene().getHeight();
+                double maxX=getScene().getWidth()-getWidth()   ;
+                double maxY=getScene().getHeight()-getHeight();
 
                 boolean narazil =false;
                 if(x<0) {x=0;narazil=true;}
