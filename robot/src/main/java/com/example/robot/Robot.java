@@ -2,7 +2,6 @@ package com.example.robot;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -41,12 +40,50 @@ public class Robot extends Canvas{
                 case 2: gc.fillRect(0,30,40,10);break;
                 case 3: gc.fillRect(0,0,10,40);break;
 
-                
+
+
 
             }
 
+    private void posun(){
+                if(getScene()==null) return;
+                double x=getLayoutX();
+                double y=getLayoutY();
+                switch(smer){
+                    case 0: y -=rychlost;break;
+                    case 1: x +=rychlost;break;
+                    case 2: y +=rychlost;break;
+                    case 3: x -=rychlost;break;
 
 
+                }
+                double maxX=getScene().getWidth();
+                double maxY=getScene().getHeight();
+
+                boolean narazil =false;
+                if(x<0) {x=0;narazil=true;}
+                if(x>maxX) {x=maxX;narazil=true;}
+                if(y<0){y=0;narazil=true;}
+                if(y>maxY) {y=maxY;narazil=true;}
+
+                setLayoutX(x);
+                setLayoutY(y);
+                if (narazil && auto) smer=(smer + 2) %4;
+                vykresli();
+        }
+    public void zapniAutomat(){
+                auto=true;
+                casovac.play();
+
+        }
+    public void vypniAutomat() {
+            auto = false;
+            casovac.stop();
+        }
+    public void klik()            {
+               if(auto) vypniAutomat();
+               else zapniAutomat();
+               requestFocus();
 
     }
 
