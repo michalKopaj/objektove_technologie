@@ -20,4 +20,9 @@ public abstract class WeatherObject {
 
     public boolean isOutside(double width, double height) {
         return false;
+
+    }
+        public void moveLeft(double dx) {
+            node.setLayoutX(node.getLayoutX() - dx);
+        }
     }
